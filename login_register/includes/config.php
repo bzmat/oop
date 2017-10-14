@@ -29,8 +29,8 @@ try {
 	
 }
 
-include ('classes/user.php');
+//include ('classes/user.php');
 
-$user = new User($db);
+//$user = new User($db);
 
  ?>

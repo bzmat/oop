@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas generowania: 05 Paź 2017, 21:03
+-- Czas generowania: 09 Paź 2017, 21:06
 -- Wersja serwera: 5.7.19-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.22-0ubuntu0.16.04.1
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `login_register`
 --
+CREATE DATABASE IF NOT EXISTS `login_register` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `login_register`;
 
 -- --------------------------------------------------------
 
@@ -26,35 +28,17 @@ SET time_zone = "+00:00";
 -- Struktura tabeli dla tabeli `members`
 --
 
-CREATE TABLE `members` (
-  `memberID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `members` (
+  `memberID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `active` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `resetToken` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `resetComplete` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No'
+  `resetComplete` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`memberID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Indeksy dla zrzutów tabel
---
-
---
--- Indexes for table `members`
---
-ALTER TABLE `members`
-  ADD PRIMARY KEY (`memberID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT dla tabeli `members`
---
-ALTER TABLE `members`
-  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
