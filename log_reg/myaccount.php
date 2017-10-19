@@ -15,7 +15,9 @@ $user_id = $_SESSION['user_session'];
 
 $stmt = $auth_user->query("SELECT * FROM users WHERE id = :user_id");
 
-$stmt->execute(array(':user_id'=>$user_id));
+$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+$stmt->execute();
 
 $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 

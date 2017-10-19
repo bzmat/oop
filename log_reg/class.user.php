@@ -30,33 +30,14 @@ class User{
 		
 	}
 
-	public function register($uname, $upass, $uemail){
-
-		try {
-
-			$stmt = $this->conn->prepare("INSERT INTO users(username, password, email) VALUES (:uname, :upass, :uemail) ");
-			$stmt->bindParam(":uname", $uname);
-			$stmt->bindParam(":upass", $upass);
-			$stmt->bindParam(":uemail", $uemail);
-
-			$stmt->execute();
-
-			return $stmt;
-			
-		} catch (PDOException $e) {
-
-			echo $e->getMessage();
-			
-		}
-	}
-
+	
 	public function doLogin($uname, $upass){
 
 		try {
 			
 			$stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :uname AND password = :upass");
-			$stmt->bindParam(':uname', $uname);
-			$stmt->bindParam(':upass', $upass);
+			$stmt->bindValue(':uname', $uname, PDO::PARAM_STR);
+			$stmt->bindValue(':upass', $upass, PDO::PARAM_STR);
 			$stmt->execute();
 			$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -5,25 +5,7 @@ session_start();
 
 	require_once  'views/header.php';
 
-	require_once 'class.user.php';
-
-	$register = new User();
-
-	
-
-	if (isset($_POST['submit'])) {
-
-		$uname = $_POST['username'];
-		$upass = $_POST['password'];
-		$uemail = $_POST['email'];
-
-		$register->register($uname, $upass, $uemail);
-		
-
-	}
-
-	
- ?>
+?>
 
 
     <div class="site-wrapper">
@@ -53,28 +35,46 @@ session_start();
 
           <div class="col-md-6 col-md-offset-3">
           	
-          	 <form action="" method="POST">
+          	 <form action="register.php" method="POST">
           	
           	
 			  <div class="form-group">
 			    <label  for="uid">User Name</label>
-			    <input type="text" class="form-control" name="username" placeholder="User Name" >
+			    <input type="text" class="form-control" name="username" placeholder="User Name" maxlength="20"
+          minlength="3" >
 			  </div>
+        <div class="e_message">
+              <?php if (isset($_SESSION['e_lenght_name']) && (!isset($_SESSION['e_message']))) echo $_SESSION['e_lenght_name']; ?>
+            </div>
 
 			  <div class="form-group">
 			    <label  for="password">Password</label>
-			    <input type="password" class="form-control" name="password"  placeholder="Password">
+			    <input type="password" class="form-control" name="password"  placeholder="Password" maxlength="20" minlength="3" >
 			  </div>
+        <div class="e_message">
+              <?php if (isset($_SESSION['e_lenght_pass']) && (!isset($_SESSION['e_message']))) echo $_SESSION['e_lenght_pass']; 
+
+                    if (isset($_SESSION['e_email']) && (!isset($_SESSION['e_message']))) echo $_SESSION['e_email']; 
+
+              ?>
+            </div>
 
 			  <div class="form-group">
 			    <label  for="email">Email</label>
-			    <input type="email" class="form-control" name="email"  placeholder="Email">
-			  </div>
+			    <input type="text" class="form-control" name="email"  placeholder="Email" maxlength="30" minlength="3">
+			  </div><br>
+        <div class="e_message">
+              <?php if (isset($_SESSION['e_lenght_mail']) && (!isset($_SESSION['e_message']))) echo $_SESSION['e_lenght_mail']; ?>
+            </div>
 
 			  
 			  <button type="submit" name="submit" class="btn btn-default" >Register</button>
 
-          	</form>
+          	</form><br>
+
+            <div class="e_message">
+              <?php if (isset($_SESSION['e_message'])) echo $_SESSION['e_message']; ?>
+            </div>
 
           </div>
 
@@ -94,4 +94,6 @@ session_start();
 
 <?php 
 	require_once 'views/footer.php';
+
+  session_destroy();
  ?>

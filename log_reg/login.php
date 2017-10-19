@@ -12,8 +12,9 @@ $login = new User();
 
 if (isset($_POST['submit'])) {
 
-	$uname = $_POST['username'];
-	$upass = $_POST['password'];
+	$uname = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+
+  $upass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
   if ($login->doLogin($uname, $upass)) {
 
