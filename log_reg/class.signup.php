@@ -68,20 +68,45 @@ public function is_email($uemail){
 
 }
 
-//sprawdzenie loginu i maila w bazie
-public function is_unic(){
+//sprawdzenie loginu  w bazie
+public function is_unic($uname, $uemail){
 
+try {
+	
+	$stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :uname ");
+
+	$stmt->bindValue(":uname", $uname, PDO::PARAM_STR );
+
+	
+	$stmt->execute();
+
+	if (($stmt->rowCount()) > 0) {
+
+		$_SESSION['e_unic_login']  = "Podany login jest już zajęty.";
+		
+	}else{
+
+		return true;
+	}
+
+	
+
+} catch (Exception $e) {
+
+	echo $e->getMessage();
+	
+}
 
 }
 
 //rejestracja nowego uzytkownika
-public function register($uname, $upass, $uemail){
+public function register($uname, $upass_hash, $uemail){
 
 		try {
 
 			$stmt = $this->conn->prepare("INSERT INTO users(username, password, email) VALUES (:uname, :upass, :uemail) ");
 			$stmt->bindValue(":uname", $uname, PDO::PARAM_STR );
-			$stmt->bindValue(":upass", $upass, PDO::PARAM_STR);
+			$stmt->bindValue(":upass", $upass_hash, PDO::PARAM_STR);
 			$stmt->bindValue(":uemail", $uemail, PDO::PARAM_STR);
 
 			$stmt->execute();

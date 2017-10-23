@@ -10,6 +10,8 @@ require_once 'class.user.php';
 
 $login = new User();
 
+
+
 if (isset($_POST['submit'])) {
 
 	$uname = filter_var($_POST['username'], FILTER_SANITIZE_STRING);

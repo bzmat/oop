@@ -23,9 +23,13 @@ $register = new Signup();
 
 		$register->is_email($uemail);
 
+		$register->is_unic($uname);
+
+		$upass_hash = password_hash($upass, PASSWORD_DEFAULT);
+
 		
 
-		$register->register($uname, $upass, $uemail);
+		$register->register($uname, $upass_hash, $uemail);
 
 		
 		

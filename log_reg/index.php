@@ -46,6 +46,9 @@ session_start();
         <div class="e_message">
               <?php if (isset($_SESSION['e_lenght_name']) && (!isset($_SESSION['e_message']))) echo $_SESSION['e_lenght_name']; ?>
             </div>
+        <div class="e_message">
+              <?php if (isset($_SESSION['e_unic_login']) && (!isset($_SESSION['e_message']))) echo $_SESSION['e_unic_login']; ?>
+            </div>
 
 			  <div class="form-group">
 			    <label  for="password">Password</label>

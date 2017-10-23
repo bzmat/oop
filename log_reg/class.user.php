@@ -35,13 +35,14 @@ class User{
 
 		try {
 			
-			$stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :uname AND password = :upass");
+			$stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :uname ");
 			$stmt->bindValue(':uname', $uname, PDO::PARAM_STR);
-			$stmt->bindValue(':upass', $upass, PDO::PARAM_STR);
 			$stmt->execute();
+
 			$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-			if ($stmt->rowCount() == 1) {
+			
+			if (($stmt->rowCount() == 1) && (password_verify($upass, $userRow['password'])) ) {
 				
 				$_SESSION['user_session'] = $userRow['id'];
 
